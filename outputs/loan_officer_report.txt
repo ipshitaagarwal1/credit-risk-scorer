@@ -1,0 +1,15 @@
+LOAN RISK EXPLANATION REPORT
+========================================
+Applicant index: 317
+Predicted default probability: 98.5%
+Decision: HIGH RISK - Flagged for review
+
+Top 5 factors driving this decision:
+  - loan_to_income_pct = 111.84  -> increases risk (impact score: +0.276)
+  - annual_income = 32308.36  -> increases risk (impact score: +0.104)
+  - loan_amount = 36134.49  -> increases risk (impact score: +0.101)
+  - age = 43.00  -> increases risk (impact score: +0.005)
+  - debt_to_income = 20.44  -> increases risk (impact score: +0.004)
+
+Plain-language summary:
+  This applicant's risk score is primarily driven by their 'loan_to_income_pct' value of 111.84, which increases risk. Review the SHAP waterfall plot and LIME HTML report for the full breakdown.
