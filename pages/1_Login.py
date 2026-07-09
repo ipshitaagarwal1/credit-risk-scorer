@@ -15,7 +15,7 @@ with tab_login:
             if verify_user(username, password):
                 st.session_state.authenticated = True
                 st.session_state.username = username
-                st.switch_page("pages/2_Risk_Assessment.py")
+                st.rerun()
             else:
                 st.error("Incorrect username or password.")
 
