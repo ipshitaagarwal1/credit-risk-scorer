@@ -4,7 +4,9 @@ import streamlit as st
 import shap
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
-from db import save_assessment
+from db import save_assessment, init_db
+
+init_db()
 
 
 @st.cache_resource

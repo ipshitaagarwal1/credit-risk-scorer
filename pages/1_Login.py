@@ -1,5 +1,7 @@
 import streamlit as st
-from db import create_user, verify_user
+from db import create_user, verify_user, init_db
+
+init_db()
 
 st.markdown("# 🔐 Login or Create an Account")
 st.write("")

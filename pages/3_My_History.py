@@ -1,6 +1,8 @@
 import streamlit as st
 import plotly.graph_objects as go
-from db import get_user_history
+from db import get_user_history, init_db
+
+init_db()
 
 st.markdown("# 📊 My Assessment History")
 st.caption(f"Logged in as **{st.session_state.username}**")
