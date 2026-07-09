@@ -1,8 +1,8 @@
-echo streamlit > requirements.txt
-echo scikit-learn >> requirements.txt
-echo xgboost >> requirements.txt
-echo shap >> requirements.txt
-echo lime >> requirements.txt
-echo pandas >> requirements.txt
-echo numpy >> requirements.txt
-echo matplotlib >> requirements.txt
+streamlit
+scikit-learn
+xgboost
+shap
+lime
+pandas
+numpy
+matplotlib
