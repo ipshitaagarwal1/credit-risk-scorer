@@ -1,8 +1,8 @@
-streamlit==1.38.0
-scikit-learn==1.5.1
-xgboost==2.1.1
-shap==0.46.0
-lime==0.2.0.1
-pandas==2.2.2
-numpy==1.26.4
-matplotlib==3.9.1
+echo streamlit > requirements.txt
+echo scikit-learn >> requirements.txt
+echo xgboost >> requirements.txt
+echo shap >> requirements.txt
+echo lime >> requirements.txt
+echo pandas >> requirements.txt
+echo numpy >> requirements.txt
+echo matplotlib >> requirements.txt
