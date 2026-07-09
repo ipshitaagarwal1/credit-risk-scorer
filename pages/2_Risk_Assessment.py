@@ -20,22 +20,32 @@ model, encoders, feature_order = load_model()
 explainer = shap.TreeExplainer(model)
 
 st.sidebar.markdown(f"### 👋 Hi, {st.session_state.username}")
-st.sidebar.divider()
-st.sidebar.markdown("## 💳 Applicant Profile")
 
-with st.sidebar.expander("👤 Personal Details", expanded=True):
+st.markdown("# 💳 Risk Assessment")
+st.caption("Fill in the applicant's details below, then click Assess Risk.")
+st.divider()
+
+st.markdown("### 💼 Applicant Profile")
+st.write("")
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.markdown("**👤 Personal Details**")
     age = st.slider("Age", 21, 65, 35)
     employment_years = st.slider("Years Employed", 0.0, 40.0, 5.0)
     home_ownership = st.selectbox("Home Ownership", ["RENT", "MORTGAGE", "OWN"])
 
-with st.sidebar.expander("💰 Financial Profile", expanded=True):
+with col2:
+    st.markdown("**💰 Financial Profile**")
     annual_income = st.number_input("Annual Income ($)", 15000, 300000, 55000, step=1000)
     credit_score = st.slider("Credit Score", 300, 850, 650)
     debt_to_income = st.slider("Debt-to-Income (%)", 0.0, 60.0, 20.0)
     num_open_accounts = st.slider("Open Accounts", 0, 25, 5)
     num_late_payments_2y = st.slider("Late Payments (last 2y)", 0, 15, 0)
 
-with st.sidebar.expander("📄 Loan Details", expanded=True):
+with col3:
+    st.markdown("**📄 Loan Details**")
     loan_amount = st.number_input("Loan Amount ($)", 1000, 100000, 15000, step=500)
     loan_purpose = st.selectbox(
         "Loan Purpose",
@@ -44,10 +54,12 @@ with st.sidebar.expander("📄 Loan Details", expanded=True):
     loan_term_months = st.selectbox("Loan Term (months)", [36, 60])
 
 loan_to_income_pct = (loan_amount / (annual_income + 1)) * 100
-assess_clicked = st.sidebar.button("🔍 Assess Risk", type="primary", use_container_width=True)
 
-st.markdown("# 💳 Risk Assessment")
-st.caption("Fill in applicant details in the sidebar, then click Assess Risk.")
+st.write("")
+_, mid, _ = st.columns([1, 1, 1])
+with mid:
+    assess_clicked = st.button("🔍 Assess Risk", type="primary", use_container_width=True)
+
 st.divider()
 
 if assess_clicked:
@@ -71,8 +83,8 @@ if assess_clicked:
 
     save_assessment(st.session_state.username, inputs, float(prob), decision_label)
 
-    col1, col2 = st.columns(2)
-    with col1:
+    result_col1, result_col2 = st.columns(2)
+    with result_col1:
         gauge_color = "#FF4C4C" if is_high_risk else "#00D980"
         fig = go.Figure(go.Indicator(
             mode="gauge+number",
@@ -94,7 +106,7 @@ if assess_clicked:
                            margin=dict(t=50, b=10, l=30, r=30))
         st.plotly_chart(fig, use_container_width=True)
 
-    with col2:
+    with result_col2:
         card_class = "decision-flag" if is_high_risk else "decision-approve"
         label = "🔴 HIGH RISK" if is_high_risk else "🟢 LOW RISK"
         action = "Flag for manual review" if is_high_risk else "Approve"
@@ -135,5 +147,3 @@ if assess_clicked:
     st.markdown(chips_html, unsafe_allow_html=True)
 
     st.success("✅ This assessment was saved to your history.")
-else:
-    st.info("👈 Fill in the applicant's details in the sidebar, then click **Assess Risk**.")
