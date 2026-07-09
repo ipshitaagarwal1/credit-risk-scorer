@@ -6,3 +6,4 @@ lime
 pandas
 numpy
 matplotlib
+plotly
